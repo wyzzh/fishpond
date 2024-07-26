@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dao.CultivationDao">
+    <select id="findBysearch" resultType="com.example.entity.Cultivation">
+        SELECT cultivation.*,fishpond.name as fishPondName
+        FROM cultivation
+        LEFT JOIN fishpond ON cultivation.fishpondId = fishpond.id
+        <where>
+            <if test="params != null and params.feedType != null and params.feedType !=''">
+                and  feedType like concat('%',#{ params.feedType},'%')
+            </if>
+        </where>
+        ORDER BY cultivation.id
+    </select>
+</mapper>

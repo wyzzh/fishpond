@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dao.PondCultivationDao">
+    <select id="findBysearch" resultType="com.example.entity.PondCultivation">
+        SELECT pondcultivation.*,fishpond.name AS fishPondName,person.`name` AS PersonName
+        FROM pondcultivation
+        LEFT JOIN fishpond ON pondcultivation.pondId = fishpond.id
+        LEFT JOIN person ON pondcultivation.personId =person.id
+        ORDER BY pondcultivation.id
+    </select>
+</mapper>
